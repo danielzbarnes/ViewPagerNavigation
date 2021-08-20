@@ -34,16 +34,18 @@ class FragmentListContainer: Fragment() {
 
         pagerAdapter = MyPagerAdapter(requireActivity())
         viewpager.adapter = pagerAdapter
-        viewpager.isUserInputEnabled = false // setting to allow the user to swipe between pages
+        viewpager.isUserInputEnabled = false // setting that allows the user to swipe between pages
 
-        // links the tablayout to the viewpager
+        // links the tablayout to the viewpager and attaches it to the ViewPager
         TabLayoutMediator(tablayout, viewpager){
             tab,pos -> tab.text = tabNames[pos]
         }.attach()
 
         tablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                viewpager.setCurrentItem(tab!!.position, false)  // setting false makes the pages jump rather than slide
+
+                // the boolean here determines whether the transition scrolls or is immediate
+                viewpager.setCurrentItem(tab!!.position, false)  
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) { }
